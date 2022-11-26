@@ -39,7 +39,7 @@ link() {
     fi
   fi
   echo "linking $link -> $target"
-  sym -f "$target" "$link"
+  ln -sf "$target" "$link"
 }
 
 check_owner() {
@@ -180,9 +180,9 @@ if [ "$DISPLAY" ]; then
   #	fi
   #
   # Compatibility symlinks
-  [ -d ~/.thumbnails ] || sym -f ~/.cache/thumbnails ~/.thumbnails
-  [ -d ~/.fonts ] || sym -f ~/.local/share/fonts ~/.fonts
-  [ -d ~/.themes ] || sym -f ~/.local/share/themes ~/.themes
+  [ -d ~/.thumbnails ] || ln -sf ~/.cache/thumbnails ~/.thumbnails
+  [ -d ~/.fonts ] || ln -sf ~/.local/share/fonts ~/.fonts
+  [ -d ~/.themes ] || ln -sf ~/.local/share/themes ~/.themes
 fi
 
 link pycharmrc
