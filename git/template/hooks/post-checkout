@@ -1,0 +1,25 @@
+#! /bin/sh
+green='\033[0;32m'
+nc='\033[0m'
+
+# Start from the repository root.
+cd ./"$(git rev-parse --show-cdup)" || exit 1
+
+# Delete OS X DS_Store files
+find . -name ".DS_Store" -delete
+
+# Delete .pyc files and empty directories.
+echo "${green}Deleting PYC files...${nc}"
+TOTAL_PYC_FILES=$( find . -name "*.pyc" | wc -l | tr -d ' ' )
+if [ $TOTAL_PYC_FILES -gt 0 ]; then
+    find . -name "*.pyc" -delete
+    echo "${green}Deleted ${TOTAL_PYC_FILES} .pyc files${nc}"
+fi;
+find . -name "*.pyc" -delete
+find . -type d -empty -delete
+
+
+# Reset submodules
+echo "${green}Resetting submodules...${nc}"
+git submodule foreach git reset --hard HEAD
+git submodule update

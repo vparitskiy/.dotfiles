@@ -1,0 +1,242 @@
+# ~/.gitconfig: git-config(1) - Git configuration
+# vim: ft=gitconfig:nowrap
+
+[user]
+	name = Vitaliy Parytskyi
+	email = v.parytskyi@gmail.com
+	#signingKey = ""
+
+#[alias]
+#	a = add --all
+#	a-p = add --all --patch
+#	ainit = "!git init && git add --all && git commit -m 'initial commit'"
+#	amend = commit --amend
+#	br = branch
+#	bra = branch -vv
+#	ci = commit
+#	ci-m = commit -m
+#	clone-svnsync = svn clone --use-svnsync-props
+#	co = checkout
+#	di = diff
+#	emerge = merge --edit --no-ff
+#	export = "!touch \"$(git rev-parse --git-dir)/git-daemon-export-ok\""
+#	fa = fetch --all
+#	follow = log --oneline --follow --stat --summary --
+#	fpush = push --force-with-lease
+#	ftime = "!date +'--date=%s' -r"
+#	fetch-notes = "!git config --add remote.origin.fetch \"+refs/notes/*:refs/notes/*\" && git fetch origin"
+#	fetch-pr = "!git config --add remote.origin.fetch \"+refs/pull/*/head:refs/remotes/pr/*\" && git fetch origin"
+#	in = log --oneline --decorate ..@{upstream}
+#	lg = log --oneline --decorate
+#	lgs = log --format=\"%C(yellow)%h%C(reset)%C(cyan)% GK%C(reset) %s\"
+#	logs = log --show-signature
+#	lost = "!git fsck | awk '/dangling commit/ {print $3 \"^!\"}' | xargs git log"
+#	ls = ls-files
+#	lsf = ls-files
+#	lsr = "!_() { [ \"$1\" ] || set -- HEAD; git ls-tree -r \"$@\"; }; _"
+#	mend = commit --amend --reuse-message HEAD
+#	mkobject = hash-object --stdin -w
+#	out = log --oneline --decorate @{upstream}..
+#	rbc = rebase --continue
+#	rbs = rebase -i
+#	re = rebase
+#	rec = rebase --continue
+#	refs = for-each-ref
+#	repack-to-alternate = repack -dal
+#	repack-to-local = repack -da
+#	sg = diff --cached
+#	st = status
+#	staged = diff --cached
+#	stat = diff --stat
+#	statg = diff --cached --stat
+#	tagv = !git tag -v $(git describe --abbrev=0)
+#	tg = log --oneline --decorate --graph
+#	tgs = log --format=\"%C(yellow)%h%C(reset)%C(cyan)% GS%C(reset) %s\" --graph
+#	tip = !git --no-pager log -1 --decorate --abbrev-commit --date=relative
+#	uncommit = reset HEAD^
+#	undo = reset --soft HEAD^
+#	unexport = "!rm -v \"$(git rev-parse --git-dir)/git-daemon-export-ok\""
+#	wdiff = diff --word-diff
+#	wshow = show --word-diff
+#	ic = commit
+#	tig = !tig
+
+#[advice]
+#	detachedHead = false
+#	pushNonFastForward = false
+#	statusHints = false
+
+[am]
+	messageid = true
+
+[color]
+	ui = auto
+	branch = auto
+	diff = auto
+	status = auto
+
+[color "decorate"]
+	remoteBranch = 202
+
+[color "diff"]
+	whitespace = red reverse
+	commit = 214
+	frag = 38
+	func = 87
+	new = 76
+	old = 196
+
+[color "grep"]
+	filename = magenta
+	linenumber = green
+
+[column]
+	ui = auto
+	branch = never
+	status = never
+	tag = auto dense
+
+[core]
+	askpass =
+	autocrlf = input
+	excludesfile = ~/.config/git/ignore
+	logAllRefUpdates = true
+	whitespace = trailing-space, space-before-tab, blank-at-eof
+
+[credential]
+	#helper = libsecret
+	useHttpPath = false
+
+[diff]
+	renames = copies
+	submodule = log
+	compactionHeuristic = true
+
+[diff "gpg"]
+	textconv = gpg -v
+	xfuncname = "^((pub|uid) .*)"
+
+[diff "ldif"]
+	xfuncname = "^(dn: .+)$"
+
+[filter "merge-known-hosts"]
+	clean = ssh-duphosts -m -
+	smudge = cat
+
+[gc]
+	reflogExpire = 365 days
+	reflogExpireUnreachable = 365 days
+
+[github]
+	user = grawity
+	password = !getnetrc -df %p github.com grawity
+
+[grep]
+	lineNumber = true
+	extendedRegexp = true
+
+[gui]
+	encoding = utf-8
+	fontdiff = -family \"DejaVu Sans Mono\" -size 9 -weight normal -slant roman -underline 0 -overstrike 0
+	spellingdictionary = none
+
+[init]
+	templatedir = ~/.config/git/template
+
+[log]
+	decorate = auto
+
+[merge]
+	conflictStyle = diff3
+	defaultToUpstream = true
+
+[push]
+	#default = upstream
+	default = current
+
+[pull]
+	rebase = false
+
+[rebase]
+	autosquash = true
+
+[receive]
+	denyCurrentBranch = refuse
+
+[sendemail]
+	from = Vitaliy Parytskyi <v.parytskyi@gmail.com>
+	confirm = auto
+	chainReplyTo = false
+	smtpServer = /usr/bin/msmtp
+	#smtpServerOption = --debug
+	smtpServerOption = --read-envelope-from
+
+[tag]
+	forceSignAnnotated = true
+
+[tig]
+	# [v2 opts]
+	main-view = id:no date:relative author:full,width=12 commit-title:graph=yes,refs,overflow=no
+	# [v2.1 opts]
+	main-view-date = relative
+	main-view-author-width = 12
+	main-view-commit-title-graph = v1
+
+	# revert to default
+	#blame-view = date:default author:full file-name:auto id:yes,color line-number:no,interval=5 text
+
+	# [global opts]
+	commit-order = topo
+	ignore-case = true
+	line-graphics = true
+	show-changes = no
+	split-view-height = 75%
+
+	mouse = true
+
+	# [diff opts]
+	diff-highlight = diff-highlight
+
+[tig "bind"]
+	generic = <Backspace> view-close
+	generic = \\ scroll-line-up
+	generic = E !git format-patch -1 %(commit)
+	generic = w :toggle wrap-lines
+	generic = ~ none
+	main = g :toggle commit-title-graph
+	main = G move-last-line
+	# fix Home/End in PuTTY
+	generic = <Esc>[1~ move-first-line
+	generic = <Esc>[4~ move-last-line
+
+[tig "color"]
+	cursor = black green
+	diff-add-highlight = black green
+	diff-del-highlight = black red
+	#diff-add-highlight = color83 color22
+	#diff-del-highlight = blue color52
+	title-blur = black blue
+	title-focus = white blue
+
+[url "https://github.com/"]
+	insteadOf = git://github.com/
+
+[url "git@gist.github.com:"]
+	pushInsteadOf = git://gist.github.com/
+	pushInsteadOf = https://gist.github.com/
+
+[url "git@github.com:"]
+	pushInsteadOf = git://github.com/
+	pushInsteadOf = https://github.com/
+
+# local config
+
+[include]
+	path = ~/.config/git/config.local
+	path = ~/.gitconfig-local
+[cola]
+	spellcheck = false
+	tabwidth = 7
+	hidpi = 1
+	icontheme = dark
+	theme = flat-dark-grey

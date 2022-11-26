@@ -1,0 +1,91 @@
+# ~/.environ - sh/bash global environment
+# vim: ft=sh
+
+# PATH
+PATH="${HOME}/bin:${HOME}/.local/bin:$HOME/dotfiles/utils:${PATH}"
+
+if [ -d ${HOME}/.local/share/lutris/runners/wine/lutris-7.2-2-x86_64 ] ; then
+   PATH="${HOME}/.local/share/lutris/runners/wine/lutris-7.2-2-x86_64/bin:${PATH}"
+fi
+
+if [ -d ${HOME}/games/_universal_pfx/ ] ; then
+   export WINEPREFIX=${HOME}/games/_universal_pfx/
+fi
+
+
+if [ -d /usr/lib/ccache ] ; then
+   PATH="/usr/lib/ccache:${PATH}" # ccache
+fi
+
+if [ -d ${HOME}/.pyenv ] ; then
+   PYENV_ROOT="${HOME}/.pyenv"
+   PATH="${PYENV_ROOT}/bin:${PATH}"
+fi
+
+if [ -d ${HOME}/.dotnet ] ; then
+   DOTNET_ROOT="${HOME}/.dotnet/"
+   export DOTNET_ROOT
+   export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+   PATH="${DOTNET_ROOT}:${PATH}"
+fi
+
+if [ -d ${HOME}/.local/share/gem/ruby/3.0.0/bin ] ; then
+   RUBY3_ROOT="${HOME}/.local/share/gem/ruby/3.0.0/"
+   export RUBY3_ROOT
+   PATH="${RUBY3_ROOT}/bin:${PATH}"
+fi
+
+export PATH
+
+set -a 
+
+# http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
+test "$XDG_CACHE_HOME"  || XDG_CACHE_HOME="$HOME/.cache"
+test "$XDG_CONFIG_HOME" || XDG_CONFIG_HOME="$HOME/.config"
+test "$XDG_DATA_HOME"   || XDG_DATA_HOME="$HOME/.local/share"
+test "$XDG_RUNTIME_DIR" || XDG_RUNTIME_DIR="$XDG_CACHE_HOME"
+
+#https://manpages.debian.org/buster/fontconfig-config/fonts-conf.5.en.html
+#test "$FONTCONFIG_PATH" || FONTCONFIG_PATH="$HOME/.config/fontconfig"
+
+# identity, locale
+NAME='Vitaliy Parytskyi'
+EMAIL="v.parytskyi@gmail.com"
+TZ="Europe/Kiev"
+
+# Proton stuff
+WINEDEBUG=-all
+DXVK_LOG_LEVEL=none
+DXVK_HUD=compiler,fps,gpuload,devinfo,api
+DXVK_SHADER_DUMP_PATH="$XDG_CACHE_HOME/dxvk/shaders/"
+DXVK_SHADER_READ_PATH="$XDG_CACHE_HOME/dxvk/shaders/"
+DXVK_STATE_CACHE_PATH="$XDG_CACHE_HOME/dxvk"
+
+# app defaults
+EDITOR=nano
+BROWSER=google-chrome:lynx
+PYTHONSTARTUP="${HOME}/.pythonrc"
+PYTHONIOENCODING="UTF-8"
+WORKON_HOME="${HOME}/.virtualenvs/"
+VIRTUAL_ENV_DISABLE_PROMPT=1
+ANSIBLE_NOCOWS="1"
+EXA_COLORS="ur=0:uw=0:ux=0:ue=0:gr=0:gw=0:gx=0:tr=0:tw=0:tx=0:uu=0:gu=0:da=38;5;8"
+GCC_COLORS="1"
+GIT_MERGE_AUTOEDIT="no"
+LESS="e M q R F X z -3"
+LESS_TERMCAP_us='[3m'		# change underline to italic
+LESS_TERMCAP_ue='[23m'	# un-italic
+MAKEFLAGS="-j $(nproc)"
+MOZ_USE_XINPUT2="1"		# better scrolling
+SUDO_PROMPT="sudo password for %p@[30;43m%h[m: "
+NVM_DIR="${HOME}/.nvm"
+HSTR_CONFIG=hicolor
+
+#Scaling
+#PLASMA_USE_QT_SCALING=1
+#QT_AUTO_SCREEN_SCALE_FACTOR=2
+#QT_SCALE_FACTOR=2
+GDK_SCALE=2
+GDK_DPI_SCALE=0.5
+
+set +a

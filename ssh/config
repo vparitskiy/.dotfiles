@@ -1,0 +1,7 @@
+Host *
+	Compression yes
+	ForwardX11 no
+
+
+
+

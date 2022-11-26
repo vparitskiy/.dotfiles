@@ -1,0 +1,3 @@
+[ -f /etc/profile ]	&& . /etc/profile
+[ -f ~/.profile ]	&& . ~/.profile
+cd .
